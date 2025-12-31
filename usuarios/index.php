@@ -36,10 +36,7 @@ if (file_exists('../app/controllers/roles/listado_activo.php')) {
             <div class="app-content">
                 <div class="container-fluid">
 
-                    <!-- Botón disparador para agregar nuevo usuario -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
-                        <i class="bi bi-person-plus-fill"></i> Agregar Nuevo Usuario
-                    </button>
+
 
                     <!-- Modal para insertar nuevo usuario -->
                     <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
@@ -125,169 +122,188 @@ if (file_exists('../app/controllers/roles/listado_activo.php')) {
                         </div>
                     </div>
 
-                    <br><br>
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover align-middle text-nowrap w-100 text-center" style="min-width: 600px;" id="Usuarios">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre del Usuario</th>
-                                    <th>E-Mail</th>
-                                    <th>Edad</th>
-                                    <th>Estado Del Usuario</th>
-                                    <th>Rol Designado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
 
-                            <tbody class="text-center">
-                                <?php
-                                $contador_usuario = 0;
-                                foreach ($usuario_datos as $usuarios) {
-                                    $id_usuario     = $usuarios['id_usuario']; // ajustado a alias
-                                    $nombre_usuario = $usuarios['usuario'];
-                                    $email_usuario  = $usuarios['email'];
-                                    $edad_usuario   = $usuarios['edad'];
-                                    $estado_usuario = $usuarios['estado_usuario'];
-                                    $nombre_roles   = $usuarios['nombre_rol'];
-                                ?>
-                                    <tr>
-                                        <th scope="row"><?= ++$contador_usuario; ?></th>
-                                        <td><?= $nombre_usuario; ?></td>
-                                        <td><?= $email_usuario; ?></td>
-                                        <td><?= $edad_usuario; ?></td>
-                                        <td>
-                                            <?php if ($estado_usuario == 'Activo') { ?>
-                                                <span class="badge rounded-pill text-bg-success">Activo</span>
-                                            <?php } else { ?>
-                                                <span class="badge rounded-pill text-bg-danger">Inactivo</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td><?= $nombre_roles; ?></td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-info text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Ver más
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="dropdown-item text-primary" href="#" data-bs-toggle="modal" data-bs-target="#editUser<?= $id_usuario ?>">
-                                                            <i class="bi bi-pencil-square"></i> Editar
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <hr class="dropdown-divider">
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item text-danger btn-eliminar" href="#">
-                                                            <i class="bi bi-trash-fill"></i> Eliminar
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                    <div class="col-md-12">
+                        <div class="card card-outline card-success">
+                            <div class="card-header">
+                                <!-- Botón disparador para agregar nuevo usuario -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
+                                    <i class="bi bi-person-plus-fill"></i> Agregar Nuevo Usuario
+                                </button>
 
-                                                <!-- Modal editar -->
-                                                <div class="modal fade" id="editUser<?= $id_usuario ?>" tabindex="-1" aria-labelledby="editUserLabel<?= $id_usuario ?>" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <form action="../app/controllers/usuarios/update_usuarios.php" method="POST" enctype="multipart/form-data">
-                                                                <div class="modal-header bg-primary text-white">
-                                                                    <h1 class="modal-title fs-5" id="editUserLabel<?= $id_usuario ?>">
-                                                                        <i class="bi bi-pencil-square"></i> Actualizar Datos del Usuario
-                                                                    </h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                                                                </div>
+                            </div> <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover align-middle text-nowrap w-100 text-center" style="min-width: 600px;" id="Usuarios">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombre del Usuario</th>
+                                                <th>E-Mail</th>
+                                                <th>Edad</th>
+                                                <th>Estado Del Usuario</th>
+                                                <th>Rol Designado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
 
-                                                                <div class="modal-body">
-                                                                    <input type="hidden" name="id_usuario" value="<?= $id_usuario ?>">
+                                        <tbody class="text-center">
+                                            <?php
+                                            $contador_usuario = 0;
+                                            foreach ($usuario_datos as $usuarios) {
+                                                $id_usuario     = $usuarios['id_usuario']; // ajustado a alias
+                                                $nombre_usuario = $usuarios['usuario'];
+                                                $email_usuario  = $usuarios['email'];
+                                                $edad_usuario   = $usuarios['edad'];
+                                                $estado_usuario = $usuarios['estado_usuario'];
+                                                $nombre_roles   = $usuarios['nombre_rol'];
+                                            ?>
+                                                <tr>
+                                                    <th scope="row"><?= ++$contador_usuario; ?></th>
+                                                    <td><?= $nombre_usuario; ?></td>
+                                                    <td><?= $email_usuario; ?></td>
+                                                    <td><?= $edad_usuario; ?></td>
+                                                    <td>
+                                                        <?php if ($estado_usuario == 'Activo') { ?>
+                                                            <span class="badge rounded-pill text-bg-success">Activo</span>
+                                                        <?php } else { ?>
+                                                            <span class="badge rounded-pill text-bg-danger">Inactivo</span>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td><?= $nombre_roles; ?></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-info text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Ver más
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <a class="dropdown-item text-primary" href="#" data-bs-toggle="modal" data-bs-target="#editUser<?= $id_usuario ?>">
+                                                                        <i class="bi bi-pencil-square"></i> Editar
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <hr class="dropdown-divider">
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item text-danger btn-eliminar"
+                                                                        href="#"
+                                                                        data-id="<?= $id_usuario ?>">
+                                                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                                                    </a>
 
-                                                                    <div class="row g-3">
-                                                                        <!-- Nombre de usuario -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="nombre_usuario<?= $id_usuario ?>" class="form-label">Nombre de Usuario</label>
-                                                                            <input type="text" name="nombre_usuario" id="nombre_usuario<?= $id_usuario ?>"
-                                                                                class="form-control" value="<?= htmlspecialchars($nombre_usuario) ?>" required>
-                                                                        </div>
+                                                                </li>
+                                                            </ul>
 
-                                                                        <!-- Email -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="email<?= $id_usuario ?>" class="form-label">Correo Electrónico</label>
-                                                                            <input type="email" name="email" id="email<?= $id_usuario ?>"
-                                                                                class="form-control" value="<?= htmlspecialchars($email_usuario) ?>" required>
-                                                                        </div>
+                                                            <!-- Modal editar -->
+                                                            <div class="modal fade" id="editUser<?= $id_usuario ?>" tabindex="-1" aria-labelledby="editUserLabel<?= $id_usuario ?>" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg">
+                                                                    <div class="modal-content">
+                                                                        <form action="../app/controllers/usuarios/update_usuarios.php" method="POST" enctype="multipart/form-data">
+                                                                            <div class="modal-header bg-primary text-white">
+                                                                                <h1 class="modal-title fs-5" id="editUserLabel<?= $id_usuario ?>">
+                                                                                    <i class="bi bi-pencil-square"></i> Actualizar Datos del Usuario
+                                                                                </h1>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                                                            </div>
 
-                                                                        <!-- Foto -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="foto<?= $id_usuario ?>" class="form-label">Foto de Perfil</label>
-                                                                            <input type="file" name="foto" id="foto<?= $id_usuario ?>"
-                                                                                class="form-control" accept="image/*">
-                                                                        </div>
+                                                                            <div class="modal-body">
+                                                                                <input type="hidden" name="id_usuario" value="<?= $id_usuario ?>">
 
-                                                                        <!-- Contraseña -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="password<?= $id_usuario ?>" class="form-label">Contraseña (dejar en blanco para no cambiar)</label>
-                                                                            <input type="password" name="password" id="password<?= $id_usuario ?>" class="form-control">
-                                                                        </div>
+                                                                                <div class="row g-3">
+                                                                                    <!-- Nombre de usuario -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="nombre_usuario<?= $id_usuario ?>" class="form-label">Nombre de Usuario</label>
+                                                                                        <input type="text" name="nombre_usuario" id="nombre_usuario<?= $id_usuario ?>"
+                                                                                            class="form-control" value="<?= htmlspecialchars($nombre_usuario) ?>" required>
+                                                                                    </div>
 
-                                                                        <!-- Confirmar Contraseña -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="confirm_password<?= $id_usuario ?>" class="form-label">Confirmar Contraseña</label>
-                                                                            <input type="password" name="confirm_password" id="confirm_password<?= $id_usuario ?>" class="form-control">
-                                                                        </div>
+                                                                                    <!-- Email -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="email<?= $id_usuario ?>" class="form-label">Correo Electrónico</label>
+                                                                                        <input type="email" name="email" id="email<?= $id_usuario ?>"
+                                                                                            class="form-control" value="<?= htmlspecialchars($email_usuario) ?>" required>
+                                                                                    </div>
 
-                                                                        <!-- Edad -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="edad<?= $id_usuario ?>" class="form-label">Edad</label>
-                                                                            <input type="number" name="edad" id="edad<?= $id_usuario ?>"
-                                                                                class="form-control" min="1" value="<?= htmlspecialchars($edad_usuario) ?>" required>
-                                                                        </div>
+                                                                                    <!-- Foto -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="foto<?= $id_usuario ?>" class="form-label">Foto de Perfil</label>
+                                                                                        <input type="file" name="foto" id="foto<?= $id_usuario ?>"
+                                                                                            class="form-control" accept="image/*">
+                                                                                    </div>
 
-                                                                        <!-- Estado -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="estado_usuario<?= $id_usuario ?>" class="form-label">Estado</label>
-                                                                            <select name="estado_usuario" id="estado_usuario<?= $id_usuario ?>" class="form-select" required>
-                                                                                <option value="Activo" <?= $estado_usuario == 'Activo' ? 'selected' : '' ?>>Activo</option>
-                                                                                <option value="Inactivo" <?= $estado_usuario == 'Inactivo' ? 'selected' : '' ?>>Inactivo</option>
-                                                                            </select>
-                                                                        </div>
+                                                                                    <!-- Contraseña -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="password<?= $id_usuario ?>" class="form-label">Contraseña (dejar en blanco para no cambiar)</label>
+                                                                                        <input type="password" name="password" id="password<?= $id_usuario ?>" class="form-control">
+                                                                                    </div>
 
-                                                                        <!-- Rol -->
-                                                                        <div class="col-md-6">
-                                                                            <label for="id_Roles<?= $id_usuario ?>" class="form-label">Rol</label>
-                                                                            <select name="id_Roles" id="id_Roles<?= $id_usuario ?>" class="form-select" required>
-                                                                                <option value="" hidden> --Seleccione un rol-- </option>
-                                                                                <?php foreach ($roles_activos as $rol) { ?>
-                                                                                    <option value="<?= $rol['id_Roles'] ?>"
-                                                                                        <?= $rol['id_Roles'] == $usuarios['id_Roles'] ? 'selected' : '' ?>>
-                                                                                        <?= $rol['nombre_rol'] ?>
-                                                                                    </option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </div>
+                                                                                    <!-- Confirmar Contraseña -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="confirm_password<?= $id_usuario ?>" class="form-label">Confirmar Contraseña</label>
+                                                                                        <input type="password" name="confirm_password" id="confirm_password<?= $id_usuario ?>" class="form-control">
+                                                                                    </div>
+
+                                                                                    <!-- Edad -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="edad<?= $id_usuario ?>" class="form-label">Edad</label>
+                                                                                        <input type="number" name="edad" id="edad<?= $id_usuario ?>"
+                                                                                            class="form-control" min="1" value="<?= htmlspecialchars($edad_usuario) ?>" required>
+                                                                                    </div>
+
+                                                                                    <!-- Estado -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="estado_usuario<?= $id_usuario ?>" class="form-label">Estado</label>
+                                                                                        <select name="estado_usuario" id="estado_usuario<?= $id_usuario ?>" class="form-select" required>
+                                                                                            <option value="Activo" <?= $estado_usuario == 'Activo' ? 'selected' : '' ?>>Activo</option>
+                                                                                            <option value="Inactivo" <?= $estado_usuario == 'Inactivo' ? 'selected' : '' ?>>Inactivo</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!-- Rol -->
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="id_Roles<?= $id_usuario ?>" class="form-label">Rol</label>
+                                                                                        <select name="id_Roles" id="id_Roles<?= $id_usuario ?>" class="form-select" required>
+                                                                                            <option value="" hidden> --Seleccione un rol-- </option>
+                                                                                            <?php foreach ($roles_activos as $rol) { ?>
+                                                                                                <option value="<?= $rol['id_Roles'] ?>"
+                                                                                                    <?= $rol['id_Roles'] == $usuarios['id_Roles'] ? 'selected' : '' ?>>
+                                                                                                    <?= $rol['nombre_rol'] ?>
+                                                                                                </option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                                                                    <i class="bi bi-x-circle"></i> Cancelar
+                                                                                </button>
+                                                                                <button type="submit" class="btn btn-outline-success">
+                                                                                    <i class="bi bi-check-circle"></i> Guardar Cambios
+                                                                                </button>
+                                                                            </div>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                                                                        <i class="bi bi-x-circle"></i> Cancelar
-                                                                    </button>
-                                                                    <button type="submit" class="btn btn-outline-success">
-                                                                        <i class="bi bi-check-circle"></i> Guardar Cambios
-                                                                    </button>
-                                                                </div>
-                                                            </form>
+
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col -->
 
 
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
 
                 </div>
             </div>
@@ -328,6 +344,31 @@ if (file_exists('../app/controllers/roles/listado_activo.php')) {
         </script>
 
         <?php include '../layouts/notificacion.php'; ?>
+
+        <script>
+            $(document).on('click', '.btn-eliminar', function(e) {
+                e.preventDefault();
+
+                let id_usuario = $(this).data('id');
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: 'Esta acción no se puede revertir',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href =
+                            '../app/controllers/usuarios/delete_usuarios.php?id=' + id_usuario;
+                    }
+                });
+            });
+        </script>
+
 
 
 
