@@ -1,45 +1,67 @@
 <?php
-include '../../conexionDB.php'; // conexión con $pdo y $URL
+// app/controllers/clientes/delete_clientes.php
+
 session_start();
+require_once '../../conexionDB.php';
 
-if (isset($_GET['id'])) {
-    $id_cliente = $_GET['id'];
-
-    try {
-        // 1. Verificar si el cliente existe
-        $check = $pdo->prepare("SELECT * FROM clientes WHERE id_Cliente = :id");
-        $check->bindParam(':id', $id_cliente, PDO::PARAM_INT);
-        $check->execute();
-        $cliente = $check->fetch(PDO::FETCH_ASSOC);
-
-        if ($cliente) {
-            // 2. Eliminar cliente
-            $query = $pdo->prepare("DELETE FROM clientes WHERE id_Cliente = :id");
-            $query->bindParam(':id', $id_cliente, PDO::PARAM_INT);
-            $query->execute();
-            $_SESSION['titulo'] = '¡Bien Hecho!';
-            $_SESSION['mensaje'] = "El cliente '{$cliente['Nombre_Cliente']}' fue eliminado correctamente.";
-            $_SESSION['icono'] = "success";
-            
-        } else {
-            // No existe el cliente
-            $_SESSION['titulo'] = 'Cliente no encontrado';
-            $_SESSION['mensaje'] = "El cliente con ID {$id_cliente} no existe.";
-            $_SESSION['icono'] = "warning";
-            
-        }
-    } catch (PDOException $e) {
-        $_SESSION['titulo'] = '¡Error!';
-        $_SESSION['mensaje'] = "Error al eliminar el cliente: " . $e->getMessage();
-        $_SESSION['icono'] = "error";
-       
-    }
-} else {$_SESSION['titulo'] = '¡Atencion!';
-    $_SESSION['mensaje'] = "ID de cliente no especificado.";
-    $_SESSION['icono'] = "warning";
-   
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    $_SESSION['titulo']  = '¡Atención!';
+    $_SESSION['mensaje'] = 'ID de cliente inválido o no especificado.';
+    $_SESSION['icono']   = 'warning';
+    header('Location: ' . $URL . 'clientes');
+    exit;
 }
 
-// Redirigir a la vista principal
-header("Location: " . $URL . "clientes");
-exit();
+$id_cliente = (int) $_GET['id'];
+
+try {
+
+    // 1. Verificar existencia y estado del cliente
+    $sql = "SELECT nombre_y_apellido, estado 
+            FROM clientes 
+            WHERE id_Clientes = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id_cliente, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$cliente) {
+        $_SESSION['titulo']  = 'Cliente no encontrado';
+        $_SESSION['mensaje'] = 'El cliente que intentas eliminar no existe.';
+        $_SESSION['icono']   = 'warning';
+        header('Location: ' . $URL . 'clientes');
+        exit;
+    }
+
+    // 2. Validar estado
+    if ($cliente['estado'] === 'Activo') {
+
+        $_SESSION['titulo']  = 'Acción no permitida';
+        $_SESSION['mensaje'] = "El cliente '{$cliente['nombre_y_apellido']}' está ACTIVO. "
+            . "Debes cambiar su estado a INACTIVO antes de eliminarlo.";
+        $_SESSION['icono']   = 'warning';
+    } else {
+
+        // 3. Eliminar físicamente
+        $delete = $pdo->prepare(
+            "DELETE FROM clientes WHERE id_Clientes = :id"
+        );
+        $delete->bindValue(':id', $id_cliente, PDO::PARAM_INT);
+        $delete->execute();
+
+        $_SESSION['titulo']  = 'Cliente eliminado';
+        $_SESSION['mensaje'] = "El cliente '{$cliente['nombre_y_apellido']}' fue eliminado correctamente.";
+        $_SESSION['icono']   = 'success';
+    }
+} catch (PDOException $e) {
+
+    $_SESSION['titulo']  = '¡Error!';
+    $_SESSION['mensaje'] = 'Ocurrió un error al eliminar el cliente.';
+    $_SESSION['icono']   = 'error';
+}
+
+// Redirección final
+header('Location: ' . $URL . 'clientes');
+exit;
