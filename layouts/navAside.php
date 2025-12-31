@@ -127,157 +127,182 @@
             <span class="brand-text fw-light">Farmacia Miscelanea</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
     <div class="sidebar-wrapper">
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
-            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+           <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
 
+    <!-- Dashboard -->
+    <li class="nav-item">
+        <a href="<?php echo $URL ?>index.php" class="nav-link">
+            <i class="nav-icon bi bi-house"></i>
+            <p>Dashboard</p>
+        </a>
+    </li>
 
-                <!-- Dashboard -->
-                <li class="nav-item">
-                    <a href="<?php echo $URL ?>index.php" class="nav-link">
-                        <i class="nav-icon bi bi-house"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
+     <!-- Administración de Accesos -->
+    <li class="nav-item menu-close">
+        <a href="#" class="nav-link inactive">
+            <i class="nav-icon bi bi-key"></i>
+            <p>Admin. de Accesos <i class="nav-arrow bi bi-chevron-right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="margin-left: 20px;">
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>usuarios" class="nav-link">
+                    <i class="nav-icon bi bi-people"></i>
+                    <p>Usuarios</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>roles" class="nav-link">
+                    <i class="nav-icon bi bi-shield-lock"></i>
+                    <p>Roles</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                <!-- Administración de Accesos -->
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link inactive">
-                        <i class="nav-icon bi bi-key"></i>
-                        <p>Admin. de Accesos <i class="nav-arrow bi bi-chevron-right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>usuarios" class="nav-link">
-                                <i class="nav-icon bi bi-people"></i>
-                                <p>Usuarios</p>
+    <!-- Caja -->
+    <li class="nav-item menu-close">
+        <a href="#" class="nav-link inactive">
+            <i class="nav-icon bi bi-cash-coin"></i>
+            <p>Caja <i class="nav-arrow bi bi-chevron-right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="margin-left: 20px;">
+          <li class="nav-item">
+                            <a href="<?php echo $URL ?>caja/administrar" class="nav-link">
+                                <i class="nav-icon bi bi-gear-fill"></i>
+                                <p>Administrar Caja</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>roles" class="nav-link">
-                                <i class="nav-icon bi bi-shield-lock"></i>
-                                <p>Roles</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>caja/historial" class="nav-link">
+                    <i class="nav-icon bi bi-clock-history"></i>
+                    <p>Historial de Caja</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                <!-- Gestión de Productos -->
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link inactive">
-                        <i class="nav-icon bi bi-box-seam"></i>
-                        <p>Productos <i class="nav-arrow bi bi-chevron-right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>productos" class="nav-link">
-                                <i class="nav-icon bi bi-capsule"></i>
-                                <p>Productos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>categorias" class="nav-link">
-                                <i class="nav-icon bi bi-tags"></i>
-                                <p>Categorías</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>laboratorios" class="nav-link">
-                                <i class="nav-icon bi bi-building"></i>
-                                <p>Laboratorios</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>presentaciones" class="nav-link">
-                                <i class="nav-icon bi bi-file-earmark-medical"></i>
-                                <p>Presentaciones</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>tipos_producto" class="nav-link">
-                                <i class="nav-icon bi bi-boxes"></i>
-                                <p>Tipos de Producto</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+    <!-- Ventas -->
+    <li class="nav-item menu-close">
+        <a href="#" class="nav-link inactive">
+            <i class="nav-icon bi bi-cart4"></i>
+            <p>Ventas <i class="nav-arrow bi bi-chevron-right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="margin-left: 20px;">
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>ventas" class="nav-link">
+                    <i class="nav-icon bi bi-plus-circle"></i>
+                    <p>Nueva Venta</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>ventas/historial" class="nav-link">
+                    <i class="nav-icon bi bi-clock-history"></i>
+                    <p>Historial de Ventas</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                <!-- Inventario -->
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link inactive">
-                        <i class="nav-icon bi bi-clipboard-data"></i>
-                        <p>Inventario <i class="nav-arrow bi bi-chevron-right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>lotes" class="nav-link">
-                                <i class="nav-icon bi bi-list-check"></i>
-                                <p>Lotes</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+    <!-- Compras -->
+    <li class="nav-item menu-close">
+        <a href="#" class="nav-link inactive">
+            <i class="nav-icon bi bi-bag-check"></i>
+            <p>Compras <i class="nav-arrow bi bi-chevron-right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="margin-left: 20px;">
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>compras" class="nav-link">
+                    <i class="nav-icon bi bi-plus-circle-dotted"></i>
+                    <p>Nueva Compra</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>compras/historial" class="nav-link">
+                    <i class="nav-icon bi bi-journal-text"></i>
+                    <p>Historial de Compras</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                <!-- Compras -->
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link inactive">
-                        <i class="nav-icon bi bi-cart-plus"></i>
-                        <p>Compras <i class="nav-arrow bi bi-chevron-right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>compras" class="nav-link">
-                                <i class="nav-icon bi bi-bag"></i>
-                                <p>Registrar Compra</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>proveedores" class="nav-link">
-                                <i class="nav-icon bi bi-truck"></i>
-                                <p>Proveedores</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+    <!-- Inventario -->
+    <li class="nav-item menu-close">
+        <a href="#" class="nav-link inactive">
+            <i class="nav-icon bi bi-clipboard-data"></i>
+            <p>Inventario <i class="nav-arrow bi bi-chevron-right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="margin-left: 20px;">
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>lotes" class="nav-link">
+                    <i class="nav-icon bi bi-list-check"></i>
+                    <p>Lotes</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                <!-- Ventas -->
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link inactive">
-                        <i class="nav-icon bi bi-cash-coin"></i>
-                        <p>Ventas <i class="nav-arrow bi bi-chevron-right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>ventas" class="nav-link">
-                                <i class="nav-icon bi bi-cash-stack"></i>
-                                <p>Registrar Venta</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>clientes" class="nav-link">
-                                <i class="nav-icon bi bi-person-vcard"></i>
-                                <p>Clientes</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+    <!-- Productos (Catálogos) -->
+    <li class="nav-item menu-close">
+        <a href="#" class="nav-link inactive">
+            <i class="nav-icon bi bi-box-seam"></i>
+            <p>Productos <i class="nav-arrow bi bi-chevron-right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="margin-left: 20px;">
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>productos" class="nav-link">
+                    <i class="nav-icon bi bi-capsule"></i>
+                    <p>Productos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>categorias" class="nav-link">
+                    <i class="nav-icon bi bi-tags"></i>
+                    <p>Categorías</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>laboratorios" class="nav-link">
+                    <i class="nav-icon bi bi-building"></i>
+                    <p>Laboratorios</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo $URL ?>presentaciones" class="nav-link">
+                    <i class="nav-icon bi bi-file-earmark-medical"></i>
+                    <p>Presentaciones</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-                <!-- Recetas Médicas -->
-                <li class="nav-item menu-close">
-                    <a href="#" class="nav-link inactive">
-                        <i class="nav-icon bi bi-file-earmark-text"></i>
-                        <p>Recetas <i class="nav-arrow bi bi-chevron-right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a href="<?php echo $URL ?>recetas" class="nav-link">
-                                <i class="nav-icon bi bi-journal-medical"></i>
-                                <p>Recetas Médicas</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+    <!-- Recetas -->
+    <li class="nav-item">
+        <a href="<?php echo $URL ?>recetas" class="nav-link">
+            <i class="nav-icon bi bi-journal-medical"></i>
+            <p>Recetas Médicas</p>
+        </a>
+    </li>
 
+    <!-- Clientes -->
+    <li class="nav-item">
+        <a href="<?php echo $URL ?>clientes" class="nav-link">
+            <i class="nav-icon bi bi-person-lines-fill"></i>
+            <p>Clientes</p>
+        </a>
+    </li>
 
-            </ul> <!--end::Sidebar Menu-->
+    <!-- Proveedores -->
+    <li class="nav-item">
+        <a href="<?php echo $URL ?>proveedores" class="nav-link">
+            <i class="nav-icon bi bi-truck"></i>
+            <p>Proveedores</p>
+        </a>
+    </li>
+
+   
+
+</ul>
+
         </nav>
     </div> <!--end::Sidebar Wrapper-->
 </aside> <!--end::Sidebar-->
