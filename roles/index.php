@@ -42,10 +42,7 @@ include '../app/controllers/roles/listado_roles.php';
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid">
 
-                    <!-- Modo de disparo de botón para Agregar Nuevo Rol -->
-                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addNewRole">
-                        <i class="bi bi-plus-circle"></i> Agregar Nuevo Rol
-                    </button>
+                  
 
                     <!-- Cuerpo del Modal para ingresar nuevo Rol -->
                     <div class="modal fade" id="addNewRole" tabindex="-1" aria-labelledby="addNewRoleLabel" aria-hidden="true">
@@ -84,9 +81,19 @@ include '../app/controllers/roles/listado_roles.php';
                         </div>
                     </div>
 
-                    <br><br>
+                    <div class="col-md-12">
+  
 
-                    <div class="table-responsive overflow-auto">
+                    <div class="card card-outline card-success">
+                                <div class="card-header">
+                                      <!-- Modo de disparo de botón para Agregar Nuevo Rol -->
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addNewRole">
+                        <i class="bi bi-plus-circle"></i> Agregar Nuevo Rol
+                    </button>                                    
+                                </div> <!-- /.card-header -->
+                                <div class="card-body">
+                                    
+                                 <div class="table-responsive overflow-auto">
                         <table class="table table-bordered table-hover align-middle text-nowrap w-100" style="min-width: 600px;" id="Roles">
                             <thead class="text-center">
                                 <tr>
@@ -197,6 +204,8 @@ include '../app/controllers/roles/listado_roles.php';
                             </tbody>
                         </table>
                     </div>
+                                </div> <!-- /.card-body -->
+                                        </div>
 
                 </div> <!--end::Container-->
             </div> <!--end::App Content-->
