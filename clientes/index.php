@@ -12,6 +12,13 @@ include '../app/controllers/clientes/listado_clientes.php';
   <title>Clientes</title><!--begin::Primary Meta Tags-->
 
   <?php include '../layouts/head.php'; ?>
+  <style>
+    /* Nuevo color rosado para Femenino */
+    .text-bg-pink {
+      color: #fff !important;
+      background-color: #e83e8c !important;
+    }
+  </style>
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -36,265 +43,336 @@ include '../app/controllers/clientes/listado_clientes.php';
               </ol>
             </div>
 
-
-
           </div> <!--end::Row-->
         </div> <!--end::Container-->
       </div> <!--end::App Content Header--> <!--begin::App Content-->
       <div class="app-content"> <!--begin::Container-->
         <div class="container-fluid">
 
-
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_cliente">
-            <i class="bi bi-person-fill-add"></i> Agregar Nuevo Cliente
-          </button>
-
           <!-- Modal -->
           <div class="modal fade" id="add_cliente" tabindex="-1" aria-labelledby="add_clienteLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                  <h1 class="modal-title fs-5" id="add_clienteLabel">Agregar Nuevo Cliente</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form action="../app/controllers/clientes/add_clientes.php" method="post">
-
+                <form action="../app/controllers/clientes/add_clientes.php" method="post">
+                  <div class="modal-header bg-primary text-white">
+                    <h1 class="modal-title fs-5" id="add_clienteLabel">Agregar Nuevo Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
                     <div class="mb-3">
-                      <label for="nombre_cliente" class="form-label" id="nombre_cliente">Nombre: </label>
-                      <input type="text" name="nombre_cliente" id="nombre_cliente" class="form-control" maxlength="200">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="dpi_o_nit" class="form-label" id="dpi_o_nit">DPI o NIT:</label>
-                      <input type="text" name="dpi_o_nit" id="dpi_o_nit" class="form-control" maxlength="25">
+                      <label for="nombreCompleto" class="fw-bolder text-start">Nombre y Apellido: </label>
+                      <input type="text" class="form-control" id="nombreCompleto" name="nombre_completo">
                     </div>
                     <div class="mb-3">
-                      <label for="telefono" class="form-label" id="telefono">Telefono:</label>
-                      <input type="text" name="telefono" id="telefono" class="form-control" maxlength="15">
+                      <label for="direccion_Cliente" class="fw-bolder text-start">Direccion:</label>
+                      <textarea name="direccion_Cliente" id="direccion_Cliente" class="form-control"></textarea>
                     </div>
                     <div class="mb-3">
-                      <label for="correo" class="form-label" id="correo">Correo Electronico:</label>
-                      <input type="email" name="correo" id="correo" class="form-control" maxlength="100" value="consumidorfinal@ejemplo.com">
-
+                      <label for="telefono_Cliente" class="fw-bolder text-start">Teléfono:</label>
+                      <input type="text" class="form-control" id="telefono_Cliente" name="telefono_Cliente">
                     </div>
                     <div class="mb-3">
-                      <label for="direccion" class="form-label" id="direccion">Direccion: </label>
-                      <textarea name="direccion" id="direccion" class="form-control"></textarea>
+                      <label for="email_Cliente" class="fw-bolder text-start">E-Mail:</label>
+                      <input type="email" class="form-control" id="email_Cliente" name="email_Cliente">
                     </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
-                      <button type="submit" class="btn btn-outline-success"><i class="bi bi-check-circle"></i> Guardar Cliente</button>
+                    <div class="mb-3">
+                      <label for="cui_Cliente" class="fw-bolder text-start">DPI:</label>
+                      <input type="text" class="form-control" id="cui_Cliente" name="cui_Cliente">
                     </div>
-                  </form>
-                </div>
-
+                    <div class="mb-3">
+                      <label for="genero_Cliente" class="fw-bolder text-start">Género:</label>
+                      <select name="genero_Cliente" id="genero_Cliente" class="form-select">
+                        <option value="" hidden> --Seleccionar el Genero-- </option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="estado_Cliente" class="fw-bolder text-start">Estado:</label>
+                      <select name="estado_Cliente" id="estado_Cliente" class="form-select">
+                        <option value="" hidden> --Seleccionar el Estado-- </option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-outline-success">Guardar Clientes</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
 
-          <br><br>
+          <div class="col-md-12">
+            <div class="card card-outline card-success">
+              <div class="card-header">
 
-          <div class="table-responsive overflow-auto">
-            <table class="table table-bordered table-hover align-middle text-nowrap w-100" style="min-width: 600px;" id="Clientes">
-              <thead class="text-center">
-                <tr>
-                  <th scope="col" class="text-center">#</th>
-                  <th scope="col" class="text-center">Nombre</th>
-                  <th scope="col" class="text-center">DPI / NIT</th>
-                  <th scope="col" class="text-center">Telefono</th>
-                  <th scope="col" class="text-center">Correo</th>
-                  <th scope="col" class="text-center">Direccion</th>
-                  <th scope="col" class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <?php
-              $contador_clientes = 0;
-              foreach ($db_clientes as $clientes) {
-                $id_clientes = $clientes['id_Cliente'];
-                $nombre_clientes = $clientes['Nombre_Cliente'];
-                $dpi_nit = $clientes['DPI_o_NIT'];
-                $telefono_c = $clientes['Telefono'];
-                $correo_c = $clientes['Correo'];
-                $direccion_c = $clientes['Direccion'];
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_cliente">
+                  <i class="bi bi-person-fill-add"></i> Agregar Cliente
+                </button>
 
-              ?>
-                <tbody class="text-center">
-                  <tr>
-                    <th scope="row"><?php echo ++$contador_clientes; ?></th>
-                    <td><?php echo $nombre_clientes; ?></td>
-                    <td><?php echo $dpi_nit; ?></td>
-                    <td><?php echo $telefono_c; ?></td>
-                    <td><?php echo $correo_c; ?></td>
-                    <td><?php echo $direccion_c; ?></td>
-                    <td>
-                      <!-- Example single danger button -->
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-info text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          Ver Más
-                        </button>
-                        <ul class="dropdown-menu">
+              </div> <!-- /.card-header -->
+              <div class="card-body">
+                <div class="table-responsive overflow-auto">
+                  <table class="table table-bordered table-hover align-middle text-nowrap w-100 text-center" id="Clientes">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>E-Mail</th>
+                        <th>DPI</th>
+                        <th>Género</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
 
-                          <li>
-                            <a class="dropdown-item text-primary" href="#" data-bs-toggle="modal" data-bs-target="#edit_Cliente<?= $id_clientes ?>">
-                              <i class="bi bi-pencil-square"></i> Editar
-                            </a>
-                          </li>
+                    <tbody class="text-center">
+                      <?php
+                      $contadorClientes = 0;
+                      foreach ($db_clientes as $cliente) {
+                        $id_cliente = $cliente['id_Clientes'];
+                        $nombre_cliente = $cliente['nombre_y_apellido'];
+                        $direccion_cliente = $cliente['direccion_cliente'];
+                        $telefono_cliente = $cliente['telefono_cliente'];
+                        $email_cliente = $cliente['email'];
+                        $cui_cliente = $cliente['cui'];
+                        $genero_cliente = $cliente['genero'];
+                        $estado_cliente = $cliente['estado'];
 
-                          <li>
-                            <hr class="dropdown-divider">
-                          </li>
+                      ?>
+                        <tr>
+                          <th scope="row"><?= ++$contadorClientes; ?></th>
+                          <td><?= htmlspecialchars($cliente['nombre_y_apellido']) ?></td>
+                          <td><?= htmlspecialchars($cliente['direccion_cliente']) ?> </td>
+                          <td><?= htmlspecialchars($cliente['telefono_cliente']) ?></td>
+                          <td><?= htmlspecialchars($cliente['email']) ?></td>
+                          <td><?= htmlspecialchars($cliente['cui']) ?></td>
+                          <td>
+                            <?php
+                            switch ($cliente['genero']) {
+                              case "Masculino":
+                                echo '<span class="badge rounded-pill text-bg-primary">Masculino</span>';
+                                break;
+                              case "Femenino":
+                                echo '<span class="badge rounded-pill text-bg-pink">Femenino</span>';
+                                break;
+                              case "Otro":
+                                echo '<span class="badge rounded-pill text-bg-secondary">Otro</span>';
+                                break;
+                              default:
+                                echo '<span class="text-muted">No definido</span>';
+                                break;
+                            }
+                            ?>
+                          </td>
+                          <td>
+                            <?php if ($cliente['estado'] === 'Activo'): ?>
+                              <span class="badge bg-success px-3 py-2">Activo</span>
+                            <?php else: ?>
+                              <span class="badge bg-danger px-3 py-2">Inactivo</span>
+                            <?php endif; ?>
 
-                          <li>
-                            <a class="dropdown-item text-danger btn-eliminar" href="#" data-id="<?= $id_clientes ?>">
-                              <i class="bi bi-trash-fill"></i> Eliminar
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
+                          </td>
+                          <td>
+                            <!-- Example single danger button -->
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ver Mas
+                              </button>
+                              <ul class="dropdown-menu">
+
+                                <li>
+                                  <a class="dropdown-item text-primary" href="#" data-bs-toggle="modal" data-bs-target="#editarCliente<?= $id_cliente; ?>">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                  </a>
+                                </li>
+                                <li>
+                                  <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                  <a class="dropdown-item text-danger btn-eliminar" href="#" data-id="<?= $id_cliente; ?>">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+
+                        </tr>
 
 
-                      <!-- Modal -->
-                      <div class="modal fade" id="edit_Cliente<?= $id_clientes ?>" tabindex="-1" aria-labelledby="edit_ClienteLabel<?= $id_clientes ?>" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <form action="../app/controllers/clientes/update_clientes.php" method="post">
-                              <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="edit_ClienteLabel<?= $id_clientes ?>">Editar Cliente</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                              </div>
-                              <div class="modal-body">
-                                <input type="hidden" name="id_Cliente" value="<?= $id_clientes ?>">
-
-                                <div class="mb-3">
-                                  <label for="nombre_cliente<?= $id_clientes ?>" class="form-label fw-semibold text-start d-block">Nombre: </label>
-                                  <input type="text" name="nombre_cliente" id="nombre_cliente<?= $id_clientes ?>"
-                                    value="<?= htmlspecialchars($nombre_clientes) ?>" class="form-control" maxlength="200">
+                        <!-- Modal para editar-->
+                        <div class="modal fade" id="editarCliente<?= $id_cliente; ?>" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form action="../app/controllers/clientes/update_clientes.php" method="post">
+                                <div class="modal-header bg-warning text-black">
+                                  <h1 class="modal-title fs-5"><i class="bi bi-pencil-square"></i> Editar Categoria</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <div class="modal-body">
 
-                                <div class="mb-3">
-                                  <label for="dpi_o_nit<?= $id_clientes ?>" class="form-label fw-semibold text-start d-block" id="dpi_o_nit">DPI o NIT:</label>
-                                  <input type="text" name="dpi_o_nit" id="dpi_o_nit<?= $id_clientes ?>" class="form-control"
-                                    value="<?= htmlspecialchars($dpi_nit) ?>" maxlength="25">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="telefono<?= $id_clientes ?>" class="form-label fw-semibold text-start d-block" id="telefono">Telefono:</label>
-                                  <input type="tel" name="telefono" id="telefono<?= $id_clientes ?>" class="form-control"
-                                    value="<?= htmlspecialchars($telefono_c) ?>" maxlength="15">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="correo<?= $id_clientes ?>" class="form-label fw-semibold text-start d-block" id="correo">Correo Electronico:</label>
-                                  <input type="email" name="correo" id="correo<?= $id_clientes ?>" class="form-control"
-                                    value="<?= htmlspecialchars($correo_c) ?>" maxlength="100" placeholder="consumidorfinal@ejemplo.com">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="direccion<?= $id_clientes ?>" class="form-label fw-semibold text-start d-block" id="direccion">Direccion: </label>
-                                  <textarea name="direccion" id="direccion<?= $id_clientes ?>" class="form-control"><?= htmlspecialchars($direccion_c) ?></textarea>
-                                </div>
-                              </div>
+                                  <input type="hidden" name="id_Clientes" value="<?= $id_cliente; ?>">
 
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                                  <i class="bi bi-x-circle"></i> Cancelar
-                                </button>
-                                <button type="submit" class="btn btn-outline-success">
-                                  <i class="bi bi-check-circle"></i> Guardar Cambios
-                                </button>
-                              </div>
 
-                            </form>
+                                  <div class="mb-3">
+                                    <label for="nombreCliente<?= $id_cliente; ?>" class="fw-bolder text-start">Nombre y Apellido: </label>
+                                    <input type="text" class="form-control" id="nombreCliente<?= $id_cliente; ?>" name="nombre_cliente" value="<?= htmlspecialchars($nombre_cliente); ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="direccionCliente<?= $id_cliente; ?>" class="fw-bolder text-start">Dirección:</label>
+                                    <textarea name="direccion" id="direccionCliente<?= $id_cliente; ?>" class="form-control"><?= htmlspecialchars($direccion_cliente); ?></textarea>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="telefonoCliente<?= $id_cliente; ?>" class="fw-bolder text-start">Teléfono:</label>
+                                    <input type="text" class="form-control" id="telefonoCliente<?= $id_cliente; ?>" name="telefono" value="<?= htmlspecialchars($telefono_cliente); ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="emailCliente<?= $id_cliente; ?>" class="fw-bolder text-start">E-Mail:</label>
+                                    <input type="email" class="form-control" id="emailCliente<?= $id_cliente; ?>" name="correo" value="<?= htmlspecialchars($email_cliente); ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="cuiCliente<?= $id_cliente; ?>" class="fw-bolder text-start">DPI:</label>
+                                    <input type="text" class="form-control" id="cuiCliente<?= $id_cliente; ?>" name="dpi_o_nit" value="<?= htmlspecialchars($cui_cliente); ?>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="generoCliente<?= $id_cliente; ?>" class="fw-bolder text-start">Género:</label>
+                                    <select name="genero" id="generoCliente<?= $id_cliente; ?>" class="form-select">
+                                      <option value="Masculino" <?= $genero_cliente === 'Masculino' ? 'selected' : ''; ?>>Masculino</option>
+                                      <option value="Femenino" <?= $genero_cliente === 'Femenino' ? 'selected' : ''; ?>>Femenino</option>
+                                      <option value="Otro" <?= $genero_cliente === 'Otro' ? 'selected' : ''; ?>>Otro</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="mb-3">
+                                    <label for="estadoCliente<?= $id_cliente; ?>" class="fw-bolder text-start">Estado:</label>
+                                    <select name="estado" id="estadoCliente<?= $id_cliente; ?>" class="form-select">
+                                      <option value="Activo" <?= $estado_cliente === 'Activo' ? 'selected' : ''; ?>>Activo</option>
+                                      <option value="Inactivo" <?= $estado_cliente === 'Inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
+                                    <button type="submit" class="btn btn-outline-success"><i class="bi bi-check-circle"></i> Guardar Cambios</button>
+                                  </div>
+                              </form>
+                            </div>
                           </div>
                         </div>
-                      </div>
+
+                      <?php } ?>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div> <!-- /.card-body -->
+            </div> <!-- /.card -->
+          </div> <!-- /.col -->
 
 
-                    </td>
-                  </tr>
-                <?php } ?>
-                </tbody>
-
-            </table>
-          </div>
-
-
-
-
-        </div> <!--end::Container-->
-      </div> <!--end::App Content-->
-    </main> <!--end::App Main-->
+        </div>
 
 
 
-    <?php include '../layouts/footer.php'; ?>
+      </div> <!--end::Container-->
+  </div> <!--end::App Content-->
+  </main> <!--end::App Main-->
 
-    <script>
-      $(document).ready(function() {
-        $('#Clientes').DataTable({
-          lengthMenu: [
-            [5, 10, 25, 50, 100],
-            [5, 10, 25, 50, 100]
-          ],
-          language: {
-            decimal: "",
-            emptyTable: "No hay datos disponibles en la tabla",
-            info: "Mostrando _START_ a _END_ de _TOTAL_ Clientes Registrados",
-            infoEmpty: "Mostrando 0 a 0 de 0 registros",
-            infoFiltered: "(filtrado de _MAX_ registros totales)",
-            lengthMenu: "Mostrar _MENU_ registros",
-            loadingRecords: "Cargando...",
-            processing: "Procesando...",
-            search: "Buscar:",
-            zeroRecords: "No se encontraron coincidencias",
-            paginate: {
-              first: "Primero",
-              last: "Último",
-              next: "Siguiente",
-              previous: "Anterior"
-            },
-            aria: {
-              sortAscending: ": activar para ordenar ascendente",
-              sortDescending: ": activar para ordenar descendente"
-            }
+
+
+  <?php include '../layouts/footer.php'; ?>
+
+  <script>
+    
+    $(document).ready(function() {
+      $('#Clientes').DataTable({
+        lengthMenu: [
+          [5, 10, 25, 50, 100],
+          [5, 10, 25, 50, 100]
+        ],
+        language: {
+          decimal: "",
+          emptyTable: "No hay datos disponibles en la tabla",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ Clientes Registrados",
+          infoEmpty: "Mostrando 0 a 0 de 0 registros",
+          infoFiltered: "(filtrado de _MAX_ registros totales)",
+          lengthMenu: "Mostrar _MENU_ registros",
+          loadingRecords: "Cargando...",
+          processing: "Procesando...",
+          search: "Buscar:",
+          zeroRecords: "No se encontraron coincidencias",
+          paginate: {
+            first: "Primero",
+            last: "Último",
+            next: "Siguiente",
+            previous: "Anterior"
+          },
+          aria: {
+            sortAscending: ": activar para ordenar ascendente",
+            sortDescending: ": activar para ordenar descendente"
           }
+        }
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const botonesEliminar = document.querySelectorAll('.btn-eliminar');
+
+      botonesEliminar.forEach(boton => {
+        boton.addEventListener('click', function() {
+          const idCliente = this.getAttribute('data-id');
+
+          Swal.fire({
+            title: "¿Estás seguro?",
+            text: "¡Esta acción no se puede deshacer!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+              // Cerrar el Swal ANTES de redirigir
+              Swal.fire({
+                title: "Procesando...",
+                text: "Por favor espera",
+                icon: "info",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                didOpen: () => {
+                  Swal.showLoading();
+
+                  // Redirigir correctamente
+                  window.location.href = "<?= $URL ?>app/controllers/clientes/delete_clientes.php?id=" + idCliente;
+                }
+              });
+
+            }
+          });
         });
       });
-    </script>
-
-   <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const botonesEliminar = document.querySelectorAll('.btn-eliminar');
-
-                botonesEliminar.forEach(boton => {
-                    boton.addEventListener('click', function() {
-                        const idRol = this.getAttribute('data-id');
-
-                        Swal.fire({
-                            title: "¿Estás seguro?",
-                            text: "¡Esta acción no se puede deshacer!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Sí, eliminarlo",
-                            cancelButtonText: "Cancelar"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Redirigir dinámicamente con PHP
-                                window.location.href = "<?= $URL ?>app/controllers/clientes/delete_clientes.php?id=" + idRol;                             
-                            }
-                        });
-                    });
-                });
-            });
-        </script>
-
-    <?php include '../layouts/notificacion.php'; ?>
-  
+    });
+  </script>
 
 
-
+  <?php include '../layouts/notificacion.php'; ?>
 
 </body><!--end::Body-->
 
