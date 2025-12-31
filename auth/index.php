@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -196,7 +196,7 @@
   </div>
 
   <main class="login-box">
-    
+
     <header class="text-center mb-4">
       <h1><i class="bi bi-capsule-pill"></i> <strong>Farmacia</strong> Miscelanea</h1>
     </header>
@@ -232,8 +232,6 @@
   <!-- Scripts -->
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11.21.0/dist/sweetalert2.all.min.js"></script>
-  
-  <?php require_once __DIR__ . '/../layouts/notificacion.php'; ?>
 
   <script>
     // Toggle mostrar/ocultar contraseña
@@ -264,6 +262,27 @@
       }
     });
   </script>
+
+  <?php if (isset($_SESSION['titulo'])): ?>
+    <script>
+      Swal.fire({
+        title: "<?php echo $_SESSION['titulo']; ?>",
+        text: "<?php echo $_SESSION['mensaje']; ?>",
+        icon: "<?php echo $_SESSION['icono']; ?>",
+        timer: 1500,
+        showConfirmButton: false,
+        position: "top-end",
+        toast: true
+      });
+    </script>
+  <?php
+    unset($_SESSION['titulo']);
+    unset($_SESSION['mensaje']);
+    unset($_SESSION['icono']);
+  endif;
+  ?>
+  
+
 </body>
 
 </html>
